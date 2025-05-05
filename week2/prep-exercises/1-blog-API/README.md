@@ -8,12 +8,12 @@ We also want our blogs to be stored `persistently`. Data persistence means keepi
 
 Before we start coding we need to define what operations will be supported via our API. Here's what we're going to do...
 
-| Operation | Description                                             | Method | Route |
-| --------- | ------------------------------------------------------- | ------ | ----- |
-| Create    | Given a title and content create a new post             |        |       |
-| Read one  | Given a title, return the content of a single blog post |        |       |
-| Update    | Given a title and content update an existing blog post  |        |       |
-| Delete    | Given a title delete an existing blog post              |        |       |
+| Operation | Description                                             | Method       | Route             | Body      |
+| --------- | ------------------------------------------------------- | ------       | -----             | ----------
+| Create    | Given a title and content create a new post             |  POST        |/blogs             | content: string, title: string          |
+| Read one  | Given a return the content of a single blog post        |  GET         |/blogs/{title}     |
+| Update    | Given a title and content update an existing blog post  |  PUT         |/blogs/{title}     | content: string
+| Delete    | Given a title delete an existing blog post              |  DELETE      |/blogs/{title}     |           |
 
 What do you think should be filled in the `Method` and `Route` columns? Think about it and see if you can guess what it should be...
 
