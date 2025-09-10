@@ -38,8 +38,8 @@
  */
 
 
-import {default as Loki} from 'lokijs'
-import {v4 as uuid} from 'uuid'
+import { default as Loki } from 'lokijs'
+import { v4 as uuid } from 'uuid'
 
 const makeInMemoryDb = () => {
     const localDb = []
@@ -57,6 +57,9 @@ const makeInMemoryDb = () => {
         },
         getById: (id) => {
             return localDb.find(user => user.id === id) || undefined
+        },
+        getByUsername: (username) => {
+            return localDb.find(user => user.username === username) || undefined
         }
     }
 }
@@ -77,7 +80,9 @@ const makeNewLokiDatabase = () => {
             return storedUser
         },
         getById: (id) => {
-            return users.findOne({id}) || undefined
+            return users.findOne({ id }) || undefined
+        }, getByUsername: (username) => {
+            return users.findOne({ username }) || undefined
         }
     }
 }
@@ -91,7 +96,7 @@ const makeNewLokiDatabase = () => {
  *              getById: (function(id: string): {id: string}&*)
  *          }}
  */
-const makeDatabase = ({isPersistent} = {isPersistent: false}) =>
+const makeDatabase = ({ isPersistent } = { isPersistent: false }) =>
     isPersistent ? makeNewLokiDatabase() : makeInMemoryDb()
 
 export default makeDatabase
@@ -102,8 +107,8 @@ if (process.argv[0].includes("node") && process.argv[1].includes("database.js"))
     console.log('running database tests -------------')
 
     // Given
-    const dbPersist = makeDatabase({isPersistent: true})
-    const dbInMem = makeDatabase({isPersistent: false})
+    const dbPersist = makeDatabase({ isPersistent: true })
+    const dbInMem = makeDatabase({ isPersistent: false })
 
     const testUser = {
         name: "super",
